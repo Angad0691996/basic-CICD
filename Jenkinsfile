@@ -28,11 +28,11 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Kill existing Gunicorn if running
+                // Kill any existing Gunicorn processes
                 sh 'pkill gunicorn || true'
 
-                // Run app in background using Gunicorn
-                sh './$VENV/bin/gunicorn -w 2 -b 0.0.0.0:5000 app:app &'
+                // Run Gunicorn in background with nohup so it survives Jenkins session
+                sh 'nohup ./$VENV/bin/gunicorn -w 2 -b 0.0.0.0:5000 app:app > gunicorn.log 2>&1 &'
             }
         }
     }
