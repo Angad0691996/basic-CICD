@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/Angad0691996/basic-CICD.git'
+                echo '✔️ Code is already checked out by Jenkins (SCM: main branch)'
             }
         }
 
